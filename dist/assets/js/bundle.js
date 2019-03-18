@@ -86,39 +86,126 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/assets/js/Storage.js":
-/*!**********************************!*\
-  !*** ./src/assets/js/Storage.js ***!
-  \**********************************/
+/***/ "./src/assets/js/Events.js":
+/*!*********************************!*\
+  !*** ./src/assets/js/Events.js ***!
+  \*********************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Storage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Event; });
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+//events - a super-basic Javascript (publish subscribe) pattern
+var Event =
+/*#__PURE__*/
+function () {
+  function Event() {
+    _classCallCheck(this, Event);
+
+    this.events = {};
+  }
+
+  _createClass(Event, [{
+    key: "on",
+    value: function on(eventName, fn) {
+      this.events[eventName] = this.events[eventName] || [];
+      this.events[eventName].push(fn);
+    }
+  }, {
+    key: "off",
+    value: function off(eventName, fn) {
+      if (this.events[eventName]) {
+        for (var i = 0; i < this.events[eventName].length; i++) {
+          if (this.events[eventName][i] === fn) {
+            this.events[eventName].splice(i, 1);
+            break;
+          }
+        }
+      }
+    }
+  }, {
+    key: "emit",
+    value: function emit(eventName, data) {
+      if (this.events[eventName]) {
+        this.events[eventName].forEach(function (fn) {
+          fn(data);
+        });
+      }
+    }
+  }]);
+
+  return Event;
+}();
+
+
+
+/***/ }),
+
+/***/ "./src/assets/js/Storage.js":
+/*!**********************************!*\
+  !*** ./src/assets/js/Storage.js ***!
+  \**********************************/
+/*! exports provided: default, noteStorage */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Storage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "noteStorage", function() { return noteStorage; });
+/* harmony import */ var _Events__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Events */ "./src/assets/js/Events.js");
+/* harmony import */ var _helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helper */ "./src/assets/js/helper.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 // LocalStorage Wrapper
 // save Array -> transform: String -> localStorage.setItem
 // get Array -> localStorage.getItem -> transform: Array
+
+
+
 var Storage =
 /*#__PURE__*/
-function () {
+function (_MyNiceEvents) {
+  _inherits(Storage, _MyNiceEvents);
+
   function Storage(localStorageKey) {
+    var _this;
+
     _classCallCheck(this, Storage);
 
-    this.key = localStorageKey;
-    this.data = this.get();
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Storage).call(this));
+    _this.key = localStorageKey;
+    _this.data = _this.get();
+    return _this;
   }
 
   _createClass(Storage, [{
     key: "addDataSet",
     value: function addDataSet(dataParameter) {
       this.data.push(dataParameter);
+      this.emit("updated", this.data);
       this.save();
     }
   }, {
@@ -136,14 +223,57 @@ function () {
     value: function get() {
       var localStorageValue = window.localStorage.getItem(this.key);
       this.data = JSON.parse(localStorageValue) || [];
+      this.emit("updated", this.data);
       return this.data;
+    }
+  }, {
+    key: "initFinished",
+    value: function initFinished() {
+      this.emit("updated", this.data);
     }
   }]);
 
   return Storage;
-}();
+}(_Events__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 
+var noteStorage = new Storage("myAwesomeNote");
+noteStorage.on("addItem", function (note) {
+  noteStorage.addDataSet(note);
+});
+noteStorage.on("updated", function (notes) {
+  Object(_helper__WEBPACK_IMPORTED_MODULE_1__["renderNotes"])(notes);
+});
+noteStorage.initFinished();
+
+/***/ }),
+
+/***/ "./src/assets/js/helper.js":
+/*!*********************************!*\
+  !*** ./src/assets/js/helper.js ***!
+  \*********************************/
+/*! exports provided: $, domElements, renderNotes */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "$", function() { return $; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "domElements", function() { return domElements; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "renderNotes", function() { return renderNotes; });
+// Helper
+var $ = function $(selector) {
+  return document.querySelector(selector);
+};
+var domElements = {
+  addNoteInput: $("#add-note"),
+  addNoteButton: $("#add-note-button"),
+  noteContainer: $("#notes")
+};
+var renderNotes = function renderNotes(notes) {
+  domElements.noteContainer.innerHTML = notes.map(function (note) {
+    return "\n        <div class=\"note col-lg-4\">\n          ".concat(note, "\n        </div>\n      ");
+  }).join("");
+};
 
 /***/ }),
 
@@ -159,30 +289,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _scss_styles_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @scss/styles.scss */ "./src/assets/scss/styles.scss");
 /* harmony import */ var _scss_styles_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_scss_styles_scss__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Storage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Storage */ "./src/assets/js/Storage.js");
+/* harmony import */ var _helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./helper */ "./src/assets/js/helper.js");
 
 
-var noteStorage = new _Storage__WEBPACK_IMPORTED_MODULE_1__["default"]("myAwesomeNote"); // Helper
 
-var $ = function $(selector) {
-  return document.querySelector(selector);
-};
-
-var addNoteInput = $("#add-note");
-var addNoteButton = $("#add-note-button");
-var noteContainer = $("#notes");
+var addNoteButton = _helper__WEBPACK_IMPORTED_MODULE_2__["domElements"].addNoteButton,
+    addNoteInput = _helper__WEBPACK_IMPORTED_MODULE_2__["domElements"].addNoteInput;
 addNoteButton.addEventListener("click", function () {
   var note = addNoteInput.value;
-  noteStorage.addDataSet(note);
-  renderNotes(noteStorage.data);
+
+  if (note) {
+    _Storage__WEBPACK_IMPORTED_MODULE_1__["noteStorage"].emit("addItem", note);
+    addNoteInput.value = "";
+  }
 });
-
-var renderNotes = function renderNotes(notes) {
-  noteContainer.innerHTML = notes.map(function (note) {
-    return "\n        <div class=\"note col-lg-4\">\n          ".concat(note, "\n        </div>\n      ");
-  }).join("");
-};
-
-renderNotes(noteStorage.data);
 
 /***/ }),
 

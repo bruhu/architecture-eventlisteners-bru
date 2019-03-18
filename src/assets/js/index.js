@@ -1,31 +1,14 @@
 import "@scss/styles.scss"
-import Storage from "./Storage"
+import { noteStorage } from "./Storage"
 
-const noteStorage = new Storage("myAwesomeNote")
+import { domElements } from "./helper"
 
-// Helper
-const $ = selector => document.querySelector(selector)
-
-const addNoteInput = $("#add-note")
-const addNoteButton = $("#add-note-button")
-const noteContainer = $("#notes")
+const { addNoteButton, addNoteInput } = domElements
 
 addNoteButton.addEventListener("click", () => {
   const note = addNoteInput.value
-  noteStorage.addDataSet(note)
-  renderNotes(noteStorage.data)
+  if (note) {
+    noteStorage.emit("addItem", note)
+    addNoteInput.value = ""
+  }
 })
-
-const renderNotes = notes => {
-  noteContainer.innerHTML = notes
-    .map(note => {
-      return `
-        <div class="note col-lg-4">
-          ${note}
-        </div>
-      `
-    })
-    .join("")
-}
-
-renderNotes(noteStorage.data)
