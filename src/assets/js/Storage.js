@@ -24,6 +24,7 @@ export default class Storage {
 
   get() {
     const localStorageValue = window.localStorage.getItem(this.key)
-    return (this.data = JSON.parse(localStorageValue) || [])
+    this.data = JSON.parse(localStorageValue) || []
+    return this.data
   }
 }

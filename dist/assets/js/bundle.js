@@ -135,7 +135,8 @@ function () {
     key: "get",
     value: function get() {
       var localStorageValue = window.localStorage.getItem(this.key);
-      return this.data = JSON.parse(localStorageValue) || [];
+      this.data = JSON.parse(localStorageValue) || [];
+      return this.data;
     }
   }]);
 
@@ -172,12 +173,13 @@ var noteContainer = $("#notes");
 addNoteButton.addEventListener("click", function () {
   var note = addNoteInput.value;
   noteStorage.addDataSet(note);
-  renderNotes(note);
+  renderNotes(noteStorage.data);
 });
 
-var renderNotes = function renderNotes(note) {
-  var templateOfNote = "\n    <div class=\"note col-lg-4\">\n      ".concat(note, "\n    </div>\n  ");
-  noteContainer.innerHTML = templateOfNote;
+var renderNotes = function renderNotes(notes) {
+  noteContainer.innerHTML = notes.map(function (note) {
+    return "\n        <div class=\"note col-lg-4\">\n          ".concat(note, "\n        </div>\n      ");
+  }).join("");
 };
 
 renderNotes(noteStorage.data);
