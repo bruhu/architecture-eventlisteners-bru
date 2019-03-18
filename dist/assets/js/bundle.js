@@ -112,18 +112,30 @@ function () {
     _classCallCheck(this, Storage);
 
     this.key = localStorageKey;
+    this.data = this.get();
   }
 
   _createClass(Storage, [{
+    key: "addDataSet",
+    value: function addDataSet(dataParameter) {
+      this.data.push(dataParameter);
+      this.save();
+    }
+  }, {
     key: "save",
-    value: function save(ele) {
-      localStorage.setItem(this.key, ele);
+    value: function save() {
+      // have access to current data
+      var data = this.data; // transform to string
+
+      var stringified = JSON.stringify(data); // save to locaStorage
+
+      window.localStorage.setItem(this.key, stringified);
     }
   }, {
     key: "get",
     value: function get() {
-      var localStorageValue = localStorage.getItem(this.key);
-      return localStorageValue;
+      var localStorageValue = window.localStorage.getItem(this.key);
+      return this.data = JSON.parse(localStorageValue) || [];
     }
   }]);
 
@@ -159,7 +171,7 @@ var addNoteButton = $("#add-note-button");
 var noteContainer = $("#notes");
 addNoteButton.addEventListener("click", function () {
   var note = addNoteInput.value;
-  noteStorage.save(note);
+  noteStorage.addDataSet(note);
   renderNotes(note);
 });
 
@@ -168,7 +180,7 @@ var renderNotes = function renderNotes(note) {
   noteContainer.innerHTML = templateOfNote;
 };
 
-renderNotes(noteStorage.get());
+renderNotes(noteStorage.data);
 
 /***/ }),
 

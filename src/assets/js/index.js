@@ -12,7 +12,7 @@ const noteContainer = $("#notes")
 
 addNoteButton.addEventListener("click", () => {
   const note = addNoteInput.value
-  noteStorage.save(note)
+  noteStorage.addDataSet(note)
   renderNotes(note)
 })
 
@@ -25,4 +25,4 @@ const renderNotes = note => {
   noteContainer.innerHTML = templateOfNote
 }
 
-renderNotes(noteStorage.get())
+renderNotes(noteStorage.data)
