@@ -97,7 +97,15 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _scss_styles_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @scss/styles.scss */ "./src/assets/scss/styles.scss");
 /* harmony import */ var _scss_styles_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_scss_styles_scss__WEBPACK_IMPORTED_MODULE_0__);
+ // Helper
 
+var $ = function $(selector) {
+  return document.querySelector(selector);
+};
+
+var addNoteInput = $("#add-note");
+var addNoteButton = $("#add-note-button");
+console.log(addNoteInput, addNoteButton);
 
 /***/ }),
 
