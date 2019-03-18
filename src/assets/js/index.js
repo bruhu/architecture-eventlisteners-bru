@@ -1,4 +1,7 @@
 import "@scss/styles.scss"
+import Storage from "./Storage"
+
+const noteStorage = new Storage("myAwesomeNote")
 
 // Helper
 const $ = selector => document.querySelector(selector)
@@ -9,7 +12,7 @@ const noteContainer = $("#notes")
 
 addNoteButton.addEventListener("click", () => {
   const note = addNoteInput.value
-  localStorage.setItem("myAwesomeNote", note)
+  noteStorage.save(note)
   renderNotes(note)
 })
 
@@ -21,3 +24,5 @@ const renderNotes = note => {
   `
   noteContainer.innerHTML = templateOfNote
 }
+
+renderNotes(noteStorage.get())

@@ -86,6 +86,54 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./src/assets/js/Storage.js":
+/*!**********************************!*\
+  !*** ./src/assets/js/Storage.js ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Storage; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+// LocalStorage Wrapper
+// save Array -> transform: String -> localStorage.setItem
+// get Array -> localStorage.getItem -> transform: Array
+var Storage =
+/*#__PURE__*/
+function () {
+  function Storage(localStorageKey) {
+    _classCallCheck(this, Storage);
+
+    this.key = localStorageKey;
+  }
+
+  _createClass(Storage, [{
+    key: "save",
+    value: function save(ele) {
+      localStorage.setItem(this.key, ele);
+    }
+  }, {
+    key: "get",
+    value: function get() {
+      var localStorageValue = localStorage.getItem(this.key);
+      return localStorageValue;
+    }
+  }]);
+
+  return Storage;
+}();
+
+
+
+/***/ }),
+
 /***/ "./src/assets/js/index.js":
 /*!********************************!*\
   !*** ./src/assets/js/index.js ***!
@@ -97,7 +145,10 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _scss_styles_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @scss/styles.scss */ "./src/assets/scss/styles.scss");
 /* harmony import */ var _scss_styles_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_scss_styles_scss__WEBPACK_IMPORTED_MODULE_0__);
- // Helper
+/* harmony import */ var _Storage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Storage */ "./src/assets/js/Storage.js");
+
+
+var noteStorage = new _Storage__WEBPACK_IMPORTED_MODULE_1__["default"]("myAwesomeNote"); // Helper
 
 var $ = function $(selector) {
   return document.querySelector(selector);
@@ -108,7 +159,7 @@ var addNoteButton = $("#add-note-button");
 var noteContainer = $("#notes");
 addNoteButton.addEventListener("click", function () {
   var note = addNoteInput.value;
-  localStorage.setItem("myAwesomeNote", note);
+  noteStorage.save(note);
   renderNotes(note);
 });
 
@@ -116,6 +167,8 @@ var renderNotes = function renderNotes(note) {
   var templateOfNote = "\n    <div class=\"note col-lg-4\">\n      ".concat(note, "\n    </div>\n  ");
   noteContainer.innerHTML = templateOfNote;
 };
+
+renderNotes(noteStorage.get());
 
 /***/ }),
 
