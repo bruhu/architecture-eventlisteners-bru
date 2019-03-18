@@ -105,10 +105,17 @@ var $ = function $(selector) {
 
 var addNoteInput = $("#add-note");
 var addNoteButton = $("#add-note-button");
+var noteContainer = $("#notes");
 addNoteButton.addEventListener("click", function () {
   var note = addNoteInput.value;
   localStorage.setItem("myAwesomeNote", note);
+  renderNotes(note);
 });
+
+var renderNotes = function renderNotes(note) {
+  var templateOfNote = "\n    <div class=\"note col-lg-4\">\n      ".concat(note, "\n    </div>\n  ");
+  noteContainer.innerHTML = templateOfNote;
+};
 
 /***/ }),
 
