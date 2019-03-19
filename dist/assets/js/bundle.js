@@ -279,14 +279,25 @@ var $ = function $(selector) {
 var domElements = {
   addNoteInput: $("#add-note"),
   addNoteButton: $("#add-note-button"),
-  noteContainer: $("#notes"),
-  noteDiv: $(".note")
+  noteContainer: $("#notes")
 };
 var renderNotes = function renderNotes(notes) {
   domElements.noteContainer.innerHTML = notes.map(function (note, index) {
     return "\n        <div class=\"note col-lg-4\" id=".concat(index, ">\n          ").concat(note, "\n        </div>\n      ");
-  }).join("");
+  }).join(""); //Only if I have the notes I can target them and add the event listeners
+
+  targetNotes();
 };
+
+var targetNotes = function targetNotes() {
+  var noteDiv = document.querySelectorAll(".note");
+  console.log(noteDiv);
+  if (noteDiv != null) noteDiv.forEach(function (oneDiv) {
+    oneDiv.addEventListener("click", function () {
+      console.log("Clicked a div ${oneDiv.id}");
+    });
+  });
+}; //Check if we have a note and eventually attach an event listener
 
 /***/ }),
 
