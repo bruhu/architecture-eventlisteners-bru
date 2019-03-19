@@ -209,6 +209,14 @@ function (_MyNiceEvents) {
       this.save();
     }
   }, {
+    key: "removeDataSet",
+    value: function removeDataSet(dataParameter) {
+      console.log("Ok remove key -> ".concat(dataParameter)); //remove from this.data
+      //we update dings dongs
+      //comment
+      //comment
+    }
+  }, {
     key: "save",
     value: function save() {
       // have access to current data
@@ -243,6 +251,10 @@ noteStorage.on("addItem", function (note) {
 });
 noteStorage.on("updated", function (notes) {
   Object(_helper__WEBPACK_IMPORTED_MODULE_1__["renderNotes"])(notes);
+}); //remove storage
+
+noteStorage.on("removeItem", function (note) {
+  noteStorage.removeDataSet(note);
 });
 noteStorage.initFinished();
 
@@ -270,7 +282,7 @@ var domElements = {
   noteContainer: $("#notes")
 };
 var renderNotes = function renderNotes(notes) {
-  domElements.noteContainer.innerHTML = notes.map(function (note) {
+  domElements.noteContainer.innerHTML = notes.map(function (note, index) {
     return "\n        <div class=\"note col-lg-4\">\n          ".concat(note, "\n        </div>\n      ");
   }).join("");
 };
@@ -302,6 +314,10 @@ addNoteButton.addEventListener("click", function () {
     _Storage__WEBPACK_IMPORTED_MODULE_1__["noteStorage"].emit("addItem", note);
     addNoteInput.value = "";
   }
+});
+noteContainer.addEventListener("click", function () {
+  var id = 0;
+  _Storage__WEBPACK_IMPORTED_MODULE_1__["noteStorage"].emit("removeItem", id);
 });
 
 /***/ }),

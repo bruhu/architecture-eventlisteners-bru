@@ -9,7 +9,7 @@ export const domElements = {
 
 export const renderNotes = notes => {
   domElements.noteContainer.innerHTML = notes
-    .map(note => {
+    .map((note, index) => {
       return `
         <div class="note col-lg-4">
           ${note}
