@@ -211,10 +211,15 @@ function (_MyNiceEvents) {
   }, {
     key: "removeDataSet",
     value: function removeDataSet(dataParameter) {
-      console.log("Ok remove key -> ".concat(dataParameter)); //remove from this.data
-      //we update dings dongs
-      //comment
-      //comment
+      this.data = this.data.filter(function (item, index) {
+        return index != dataParameter;
+      }); // this.data.splice(dataParameter, 1);
+      //try to do the same with filter()
+
+      console.log("Ok remove key -> ".concat(dataParameter));
+      console.log(this.data);
+      this.emit("updated", this.data);
+      this.save();
     }
   }, {
     key: "save",
@@ -272,7 +277,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "$", function() { return $; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "domElements", function() { return domElements; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "renderNotes", function() { return renderNotes; });
-// Helper
+/* harmony import */ var _Storage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Storage */ "./src/assets/js/Storage.js");
+ // Helper
+
 var $ = function $(selector) {
   return document.querySelector(selector);
 };
@@ -286,15 +293,18 @@ var renderNotes = function renderNotes(notes) {
     return "\n        <div class=\"note col-lg-4\" id=".concat(index, ">\n          ").concat(note, "\n        </div>\n      ");
   }).join(""); //Only if I have the notes I can target them and add the event listeners
 
+  domElements.noteDiv = document.querySelectorAll(".note");
   targetNotes();
 }; //Check if we have a note and eventually attach an event listener
 
 var targetNotes = function targetNotes() {
-  var noteDiv = document.querySelectorAll(".note");
-  console.log(noteDiv);
+  var noteDiv = document.querySelectorAll(".note"); // console.log(noteDiv);
+
   if (noteDiv != null) noteDiv.forEach(function (oneDiv) {
     oneDiv.addEventListener("click", function () {
-      console.log("Clicked a div ".concat(oneDiv.id));
+      // console.log(`Clicked a div ${oneDiv.id}`);
+      var id = oneDiv.id;
+      _Storage__WEBPACK_IMPORTED_MODULE_0__["noteStorage"].emit("removeItem", id);
     });
   });
 };

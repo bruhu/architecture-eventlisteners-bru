@@ -1,3 +1,5 @@
+import { noteStorage } from "./Storage";
+
 // Helper
 export const $ = selector => document.querySelector(selector);
 
@@ -19,19 +21,20 @@ export const renderNotes = notes => {
     .join("");
 
   //Only if I have the notes I can target them and add the event listeners
+  domElements.noteDiv = document.querySelectorAll(".note");
   targetNotes();
 };
 
 //Check if we have a note and eventually attach an event listener
 const targetNotes = () => {
   const noteDiv = document.querySelectorAll(".note");
-  console.log(noteDiv);
+  // console.log(noteDiv);
   if (noteDiv != null)
     noteDiv.forEach(oneDiv => {
       oneDiv.addEventListener("click", () => {
-        console.log(`Clicked a div ${oneDiv.id}`);
+        // console.log(`Clicked a div ${oneDiv.id}`);
+        const id = oneDiv.id;
+        noteStorage.emit("removeItem", id);
       });
     });
 };
-
-

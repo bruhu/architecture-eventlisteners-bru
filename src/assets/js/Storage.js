@@ -20,14 +20,14 @@ export default class Storage extends MyNiceEvents {
   }
 
   removeDataSet(dataParameter) {
+    this.data = this.data.filter((item, index) => index != dataParameter);
+
+    // this.data.splice(dataParameter, 1);
+    //try to do the same with filter()
     console.log(`Ok remove key -> ${dataParameter}`);
-    //remove from this.data
-
-    //we update dings dongs
-
-    //comment
-
-    //comment
+    console.log(this.data);
+    this.emit("updated", this.data);
+    this.save();
   }
 
   save() {
