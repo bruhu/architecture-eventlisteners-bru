@@ -22,15 +22,16 @@ export const renderNotes = notes => {
   targetNotes();
 };
 
+//Check if we have a note and eventually attach an event listener
 const targetNotes = () => {
   const noteDiv = document.querySelectorAll(".note");
   console.log(noteDiv);
   if (noteDiv != null)
     noteDiv.forEach(oneDiv => {
       oneDiv.addEventListener("click", () => {
-        console.log("Clicked a div ${oneDiv.id}");
+        console.log(`Clicked a div ${oneDiv.id}`);
       });
     });
 };
 
-//Check if we have a note and eventually attach an event listener
+

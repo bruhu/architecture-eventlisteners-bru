@@ -287,17 +287,17 @@ var renderNotes = function renderNotes(notes) {
   }).join(""); //Only if I have the notes I can target them and add the event listeners
 
   targetNotes();
-};
+}; //Check if we have a note and eventually attach an event listener
 
 var targetNotes = function targetNotes() {
   var noteDiv = document.querySelectorAll(".note");
   console.log(noteDiv);
   if (noteDiv != null) noteDiv.forEach(function (oneDiv) {
     oneDiv.addEventListener("click", function () {
-      console.log("Clicked a div ${oneDiv.id}");
+      console.log("Clicked a div ".concat(oneDiv.id));
     });
   });
-}; //Check if we have a note and eventually attach an event listener
+};
 
 /***/ }),
 
