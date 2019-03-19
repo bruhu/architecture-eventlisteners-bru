@@ -13,7 +13,7 @@ addNoteButton.addEventListener("click", () => {
   }
 });
 
-noteContainer.addEventListener("click", () => {
-  const id = 0;
-  noteStorage.emit("removeItem", id);
-});
+// noteContainer.addEventListener("click", () => {
+//   const id = 0;
+//   noteStorage.emit("removeItem", id);
+// });

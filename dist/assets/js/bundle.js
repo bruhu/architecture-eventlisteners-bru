@@ -279,11 +279,12 @@ var $ = function $(selector) {
 var domElements = {
   addNoteInput: $("#add-note"),
   addNoteButton: $("#add-note-button"),
-  noteContainer: $("#notes")
+  noteContainer: $("#notes"),
+  noteDiv: $(".note")
 };
 var renderNotes = function renderNotes(notes) {
   domElements.noteContainer.innerHTML = notes.map(function (note, index) {
-    return "\n        <div class=\"note col-lg-4\">\n          ".concat(note, "\n        </div>\n      ");
+    return "\n        <div class=\"note col-lg-4\" id=".concat(index, ">\n          ").concat(note, "\n        </div>\n      ");
   }).join("");
 };
 
@@ -314,11 +315,10 @@ addNoteButton.addEventListener("click", function () {
     _Storage__WEBPACK_IMPORTED_MODULE_1__["noteStorage"].emit("addItem", note);
     addNoteInput.value = "";
   }
-});
-noteContainer.addEventListener("click", function () {
-  var id = 0;
-  _Storage__WEBPACK_IMPORTED_MODULE_1__["noteStorage"].emit("removeItem", id);
-});
+}); // noteContainer.addEventListener("click", () => {
+//   const id = 0;
+//   noteStorage.emit("removeItem", id);
+// });
 
 /***/ }),
 
