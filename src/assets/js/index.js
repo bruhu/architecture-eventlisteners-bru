@@ -3,7 +3,7 @@ import { noteStorage } from "./Storage";
 
 import { domElements } from "./helper";
 
-const { addNoteButton, addNoteInput } = domElements;
+const { addNoteButton, addNoteInput, noteDiv } = domElements;
 
 addNoteButton.addEventListener("click", () => {
   const note = addNoteInput.value;
