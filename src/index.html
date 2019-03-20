@@ -8,25 +8,28 @@
   </head>
 
   <body>
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <div class="form-group">
-            <label for="add-note">Add Note</label>
-            <input
-              type="text"
-              class="form-control"
-              id="add-note"
-              placeholder="Add your note here"
-            />
+    <div id="main-content">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group web-title">
+              <label for="add-note">To-do List App</label>
+              <input
+                type="text"
+                class="form-control"
+                id="add-note"
+                placeholder="Add your note here"
+              />
+            </div>
+            <button id="add-note-button" type="button" class="btn btn-primary">
+              Add
+            </button>
           </div>
-          <button id="add-note-button" type="button" class="btn btn-primary">
-            Add
-          </button>
         </div>
+        <hr />
+        <div id="notes" class="row"></div>
       </div>
-      <hr />
-      <div id="notes" class="row"></div>
     </div>
+    <!--end of #main-content-->
   </body>
 </html>

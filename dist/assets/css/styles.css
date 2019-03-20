@@ -7020,11 +7020,20 @@ a.text-dark:hover, a.text-dark:focus {
     color: inherit;
     border-color: #dee2e6; } }
 
+body {
+  background-image: url(../img/isometropolis.jpg); }
+
 .note {
   margin: 8px;
-  padding: 8px;
-  background-color: #ff6fe0;
-  border-radius: 3px; }
+  padding: 20px;
+  background-color: rgba(70, 70, 70, 0.747);
+  color: white;
+  border-radius: 3px;
+  height: 150px; }
+
+.web-title {
+  color: hotpink;
+  font-size: 8em; }
 
 
 /*# sourceMappingURL=styles.css.map*/

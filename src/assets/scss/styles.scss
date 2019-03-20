@@ -1,8 +1,19 @@
 @import "~bootstrap/scss/bootstrap";
 
+body {
+  background-image: url(../img/isometropolis.jpg);
+}
+
 .note {
   margin: 8px;
-  padding: 8px;
-  background-color: rgb(255, 111, 224);
+  padding: 20px;
+  background-color: rgba(70, 70, 70, 0.747);
+  color: white;
   border-radius: 3px;
+  height: 150px;
+}
+
+.web-title {
+  color: hotpink;
+  font-size: 8em;
 }
