@@ -2,7 +2,7 @@
 
 body {
   background-image: url(../img/chalkboard.jpg);
-  font-family: 'Archivo', sans-serif
+  font-family: "Archivo", sans-serif;
 }
 
 #main-content {
@@ -16,18 +16,51 @@ body {
   color: black;
   border-radius: 3px;
   height: 150px;
-  font-family: 'Alegreya', serif;
+  font-family: "Alegreya", serif;
   overflow: auto;
 }
 
 .web-title {
-  font-family: 'Archivo Black', sans-serif;
-  color: hotpink;
+  font-family: "Archivo Black", sans-serif;
+  color: rgba(255, 105, 105, 0.452);
   font-size: 4em;
   letter-spacing: 0.2em;
 }
 
-.input-field-addnote{
-  font-family: 'Alegreya', serif;
+.input-field-addnote {
+  font-family: "Alegreya", serif;
   font-style: italic;
+}
+
+/* for real */
+
+.button-overwrite {
+  color: rgba(255, 105, 105, 0.452);
+  border-color: rgba(255, 105, 105, 0.452);
+}
+.button-overwrite:hover {
+  color: #fff;
+  background-color: rgba(255, 105, 105, 0.452);
+  border-color: rgba(255, 105, 105, 0.452);
+}
+.button-overwrite:focus,
+.button-overwrite.focus {
+  box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5);
+}
+.button-overwrite.disabled,
+.button-overwrite:disabled {
+  color: rgba(255, 105, 105, 0.452);
+  background-color: transparent;
+}
+.button-overwrite:not(:disabled):not(.disabled):active,
+.button-overwrite:not(:disabled):not(.disabled).active,
+.show > .button-overwrite.dropdown-toggle {
+  color: #fff;
+  background-color: rgba(255, 105, 105, 0.452);
+  border-color: rgba(255, 105, 105, 0.452);
+}
+.button-overwrite:not(:disabled):not(.disabled):active:focus,
+.button-overwrite:not(:disabled):not(.disabled).active:focus,
+.show > .button-overwrite.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5);
 }
