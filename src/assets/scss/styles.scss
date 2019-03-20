@@ -32,20 +32,20 @@ body {
   font-style: italic;
 }
 
-/* for real */
+/* Overwritten styles for outline button */
 
 .button-overwrite {
   color: rgba(255, 105, 105, 0.452);
   border-color: rgba(255, 105, 105, 0.452);
 }
 .button-overwrite:hover {
-  color: #fff;
+  
   background-color: rgba(255, 105, 105, 0.452);
   border-color: rgba(255, 105, 105, 0.452);
 }
 .button-overwrite:focus,
 .button-overwrite.focus {
-  box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(153, 118, 118, 0.5);
 }
 .button-overwrite.disabled,
 .button-overwrite:disabled {
@@ -62,5 +62,5 @@ body {
 .button-overwrite:not(:disabled):not(.disabled):active:focus,
 .button-overwrite:not(:disabled):not(.disabled).active:focus,
 .show > .button-overwrite.dropdown-toggle:focus {
-  box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(153, 118, 118, 0.5);
 }
