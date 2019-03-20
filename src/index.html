@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title><%= htmlWebpackPlugin.options.title %></title>
-    <link href="https://fonts.googleapis.com/css?family=Istok+Web:400,700|Lora:400,400i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Alegreya:400,400i|Archivo+Black|Archivo:400,400i" rel="stylesheet">
   </head>
 
   <body>
@@ -13,8 +13,8 @@
       <div class="container">
         <div class="row">
           <div class="col-12">
-            <div class="form-group web-title">
-              <label for="add-note">To-do List</label>
+            <div class="form-group ">
+              <label for="add-note" class="web-title">To-do List</label>
               <input
                 type="text"
                 class="form-control"
@@ -22,7 +22,11 @@
                 placeholder="Add your note here"
               />
             </div>
-            <button id="add-note-button" type="button" class="btn btn-primary">
+            <button
+              id="add-note-button"
+              type="button"
+              class="btn btn-outline-secondary btn-sm"
+            >
               Add
             </button>
           </div>

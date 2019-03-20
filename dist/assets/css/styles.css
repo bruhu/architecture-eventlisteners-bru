@@ -7022,7 +7022,10 @@ a.text-dark:hover, a.text-dark:focus {
 
 body {
   background-image: url(../img/chalkboard.jpg);
-  font-family: "Istok Web", sans-serif; }
+  font-family: 'Archivo', sans-serif; }
+
+#main-content {
+  padding: 2em; }
 
 .note {
   margin: 8px;
@@ -7031,12 +7034,14 @@ body {
   color: black;
   border-radius: 3px;
   height: 150px;
-  font-family: "Lora", serif;
+  font-family: 'Alegreya', serif;
   overflow: auto; }
 
 .web-title {
-  color: white;
-  font-size: 2em; }
+  font-family: 'Archivo Black', sans-serif;
+  color: hotpink;
+  font-size: 2em;
+  font-weight: bolder; }
 
 
 /*# sourceMappingURL=styles.css.map*/
