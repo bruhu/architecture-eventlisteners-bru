@@ -7021,19 +7021,21 @@ a.text-dark:hover, a.text-dark:focus {
     border-color: #dee2e6; } }
 
 body {
-  background-image: url(../img/isometropolis.jpg); }
+  background-image: url(../img/chalkboard.jpg);
+  font-family: 'Istok Web', sans-serif; }
 
 .note {
   margin: 8px;
   padding: 20px;
-  background-color: rgba(70, 70, 70, 0.747);
-  color: white;
+  background-color: rgba(235, 235, 235, 0.747);
+  color: black;
   border-radius: 3px;
-  height: 150px; }
+  height: 150px;
+  font-family: 'Lora', serif; }
 
 .web-title {
-  color: hotpink;
-  font-size: 8em; }
+  color: white;
+  font-size: 2em; }
 
 
 /*# sourceMappingURL=styles.css.map*/
