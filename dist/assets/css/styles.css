@@ -7035,7 +7035,8 @@ body {
   border-radius: 3px;
   height: 150px;
   font-family: "Alegreya", serif;
-  overflow: auto; }
+  overflow: auto;
+  font-size: 1.2em; }
 
 .web-title {
   font-family: "Archivo Black", sans-serif;
@@ -7045,7 +7046,8 @@ body {
 
 .input-field-addnote {
   font-family: "Alegreya", serif;
-  font-style: italic; }
+  font-style: italic;
+  font-size: 1.2em; }
 
 /* Overwritten styles for outline button */
 .button-overwrite {
